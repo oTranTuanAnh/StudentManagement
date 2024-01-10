@@ -1,9 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-public class Student extends Person{
+public class Student implements Serializable {
+    private String id;
+    private String name;
+    private String address;
+    private LocalDate dateOfBirth;
+    private String gender;
     private double point_subject_Math;
     private double point_subject_Physics;
     private double point_subject_Engineering;
@@ -11,17 +16,55 @@ public class Student extends Person{
     public Student() {
     }
 
-    public Student(double point_subject_Math, double point_subject_Physics, double point_subject_Engineering) {
+    public Student(String id, String name, String address, LocalDate dateOfBirth, String gender, double point_subject_Math, double point_subject_Physics, double point_subject_Engineering) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
         this.point_subject_Math = point_subject_Math;
         this.point_subject_Physics = point_subject_Physics;
         this.point_subject_Engineering = point_subject_Engineering;
     }
 
-    public Student(String id, String name, String address, LocalDate dateOfBirth, boolean sexual, double point_subject_Math, double point_subject_Physics, double point_subject_Engineering) {
-        super(id, name, address, dateOfBirth, sexual);
-        this.point_subject_Math = point_subject_Math;
-        this.point_subject_Physics = point_subject_Physics;
-        this.point_subject_Engineering = point_subject_Engineering;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public double getPoint_subject_Math() {
@@ -49,12 +92,16 @@ public class Student extends Person{
     }
 
     @Override
-    public String showInfor() {
+    public String toString() {
         return "Student{" +
-                super.toString()+
-                "point_subject_Math=" + point_subject_Math +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", gender='" + gender + '\'' +
+                ", point_subject_Math=" + point_subject_Math +
                 ", point_subject_Physics=" + point_subject_Physics +
-                ", point_subject_Engineering=" + point_subject_Engineering+
+                ", point_subject_Engineering=" + point_subject_Engineering +
                 '}';
     }
 }
