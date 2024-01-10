@@ -1,6 +1,6 @@
 package views;
 
-import model.ReadWriteFile;
+import storage.ReadWriteFile;
 import model.Student;
 import model.StudentManager;
 
@@ -28,30 +28,32 @@ public class Views {
 
             switch (choice){
                 case 1:
-                    studentManager.setStudentsList(ReadWriteFile.readFile("data.txt"));
                     Student st = studentManager.createNewStudent();
-                    studentManager.insert(st);
-                    ReadWriteFile.writeFile("data.txt", studentManager.getStudentsList());
+                    studentManager.addStudent(st);
                     System.out.println("Them thanh cong!!!");
                     break;
                 case 2:
-                    studentManager.setStudentsList(ReadWriteFile.readFile("data.txt"));
-                    ArrayList<Student> list = studentManager.getStudentsList();
                     System.out.print("Nhap ID sinh vien: ");
                     String idInput = studentManager.stringInput();
-                    for (Student s: list){
+                    for (Student s: StudentManager.studentArrayList){
                         if (s.getId().equals(idInput)){
                         studentManager.editStudentByID(s);
                         System.out.println("SUA THANH CONG!!!");
                         }
                     }
-                    ReadWriteFile.writeFile("data.txt", studentManager.getStudentsList());
+
                     break;
                 case 3:
+                    System.out.print("Nhap ID sinh vien: ");
+                    String idInputnum = studentManager.stringInput();
+                    for (Student s: StudentManager.studentArrayList){
+                        if (s.getId().equals(idInputnum)){
+                            StudentManager.studentArrayList.remove(s);
+                        }
+                    }
 
                     break;
                 case 4:
-                    studentManager.setStudentsList(ReadWriteFile.readFile("data.txt"));
                     studentManager.showStudentsList();
                     break;
                 case 5:

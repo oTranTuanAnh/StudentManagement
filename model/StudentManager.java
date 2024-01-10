@@ -1,16 +1,19 @@
 package model;
 
+import storage.ReadWriteFile;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentManager {
-    private ArrayList<Student> studentsList;
+    public static final String DATA_FILE = "data.txt";
+    public static ReadWriteFile instanceReadWrite = ReadWriteFile.getInstance();
+    public static ArrayList<Student> studentArrayList = (ArrayList<Student>) instanceReadWrite.readData("data.txt");
+
+
 
     public StudentManager() {
-    }
-    public StudentManager(ArrayList<Student> studentsList) {
-        this.studentsList = studentsList;
     }
     public int intInput(){
         Scanner sc = new Scanner(System.in);
@@ -108,29 +111,12 @@ public class StudentManager {
         }
 
     }
-
-
-
-
-    public ArrayList<Student> getStudentsList() {
-        return studentsList;
-    }
-    public void insert(Student student){
-        this.studentsList.add(student);
-    }
-    public void delete(Student student){
-        this.studentsList.remove(student);
-    }
-    public void update(Student student){
-        this.studentsList.remove(student);
-        this.studentsList.add(student);
-    }
-
-    public void setStudentsList(ArrayList<Student> studentsList) {
-        this.studentsList = studentsList;
+    public void addStudent(Student student){
+        studentArrayList.add(student);
+        instanceReadWrite.writeData(DATA_FILE,studentArrayList);
     }
     public void showStudentsList(){
-        for (Student s: this.studentsList){
+        for (Student s: studentArrayList){
             System.out.println(s);
         }
     }
