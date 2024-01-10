@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentManager {
+    private Student student;
     public static final String DATA_FILE = "data.txt";
-    public static ReadWriteFile instanceReadWrite = ReadWriteFile.getInstance();
-    public static ArrayList<Student> studentArrayList = (ArrayList<Student>) instanceReadWrite.readData("data.txt");
-
-
+    private static final ReadWriteFile instanceReadWrite = ReadWriteFile.getInstance();
+    public static ArrayList<Student> studentArrayList = (ArrayList<Student>) instanceReadWrite.readData(DATA_FILE);
 
     public StudentManager() {
     }
@@ -26,30 +25,6 @@ public class StudentManager {
     public String stringInput(){
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
-    }
-    public Student createNewStudent(){
-        System.out.print("Nhap ma sinh vien: ");
-        String id = stringInput();
-        System.out.print("Nhap ho va ten: ");
-        String name = stringInput();
-        System.out.print("Nhap dia chi: ");
-        String address = stringInput();
-        System.out.print("Nhap ngay sinh: ");
-        int day = intInput();
-        System.out.print("Nhap thang sinh: ");
-        int month = intInput();
-        System.out.print("Nhap nam sinh: ");
-        int year = intInput();
-        LocalDate dateOfBirth = LocalDate.of(year,month,day);
-        System.out.print("Nhap gioi tinh (nam/nu): ");
-        String gender = stringInput();
-        System.out.print("Nhap diem mon Toan: ");
-        double mathPoint = doubleInput();
-        System.out.print("Nhap diem mon Vat ly: ");
-        double physicsPoint = doubleInput();
-        System.out.print("Nhap diem mon Ky thuat: ");
-        double engineeringPoint = doubleInput();
-        return new Student(id, name, address, dateOfBirth, gender, mathPoint, physicsPoint, engineeringPoint);
     }
     public void editStudentByID(Student student){
         System.out.println("*******");
@@ -113,6 +88,11 @@ public class StudentManager {
     }
     public void addStudent(Student student){
         studentArrayList.add(student);
+    }
+    public void removeStudent(Student student){
+        studentArrayList.remove(student);
+    }
+    public void writeStudent(){
         instanceReadWrite.writeData(DATA_FILE,studentArrayList);
     }
     public void showStudentsList(){
@@ -121,7 +101,7 @@ public class StudentManager {
         }
     }
 
-    private Student student;
+
 
     public double getAvgPoint(){
         double avgPoint = (student.getPoint_subject_Engineering()+student.getPoint_subject_Math()+student.getPoint_subject_Physics())/3;
