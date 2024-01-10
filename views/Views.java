@@ -39,14 +39,13 @@ public class Views {
                     ArrayList<Student> list = studentManager.getStudentsList();
                     System.out.print("Nhap ID sinh vien: ");
                     String idInput = studentManager.stringInput();
-                    for (int i = 0; i < list.size() ; i++) {
-                        if (list.get(i).getId().equals(idInput)){
-
+                    for (Student s: list){
+                        if (s.getId().equals(idInput)){
+                        studentManager.editStudentByID(s);
+                        System.out.println("SUA THANH CONG!!!");
                         }
-
                     }
-
-
+                    ReadWriteFile.writeFile("data.txt", studentManager.getStudentsList());
                     break;
                 case 3:
 
