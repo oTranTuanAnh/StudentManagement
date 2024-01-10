@@ -1,106 +1,60 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class Student {
-    private String studentID;
-    private String studentName;
-    private String address;
-    private LocalDate dateOfBirth;
-    private boolean sexual;
-    private double subjectPoint1;
-    private double subjectPoint2;
-    private double subjectPoint3;
+public class Student extends Person{
+    private double point_subject_Math;
+    private double point_subject_Physics;
+    private double point_subject_Engineering;
 
     public Student() {
     }
 
-    public Student(String studentID, String studentName, String address, LocalDate dateOfBirth, boolean sexual, double subjectPoint1, double subjectPoint2, double subjectPoint3) {
-        this.studentID = studentID;
-        this.studentName = studentName;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
-        this.sexual = sexual;
-        this.subjectPoint1 = subjectPoint1;
-        this.subjectPoint2 = subjectPoint2;
-        this.subjectPoint3 = subjectPoint3;
+    public Student(double point_subject_Math, double point_subject_Physics, double point_subject_Engineering) {
+        this.point_subject_Math = point_subject_Math;
+        this.point_subject_Physics = point_subject_Physics;
+        this.point_subject_Engineering = point_subject_Engineering;
     }
 
-    public String getStudentID() {
-        return studentID;
+    public Student(String id, String name, String address, LocalDate dateOfBirth, boolean sexual, double point_subject_Math, double point_subject_Physics, double point_subject_Engineering) {
+        super(id, name, address, dateOfBirth, sexual);
+        this.point_subject_Math = point_subject_Math;
+        this.point_subject_Physics = point_subject_Physics;
+        this.point_subject_Engineering = point_subject_Engineering;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public double getPoint_subject_Math() {
+        return point_subject_Math;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public void setPoint_subject_Math(double point_subject_Math) {
+        this.point_subject_Math = point_subject_Math;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public double getPoint_subject_Physics() {
+        return point_subject_Physics;
     }
 
-    public String getAddress() {
-        return address;
+    public void setPoint_subject_Physics(double point_subject_Physics) {
+        this.point_subject_Physics = point_subject_Physics;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public double getPoint_subject_Engineering() {
+        return point_subject_Engineering;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public boolean isSexual() {
-        return sexual;
-    }
-
-    public void setSexual(boolean sexual) {
-        this.sexual = sexual;
-    }
-
-    public double getSubjectPoint1() {
-        return subjectPoint1;
-    }
-
-    public void setSubjectPoint1(double subjectPoint1) {
-        this.subjectPoint1 = subjectPoint1;
-    }
-
-    public double getSubjectPoint2() {
-        return subjectPoint2;
-    }
-
-    public void setSubjectPoint2(double subjectPoint2) {
-        this.subjectPoint2 = subjectPoint2;
-    }
-
-    public double getSubjectPoint3() {
-        return subjectPoint3;
-    }
-
-    public void setSubjectPoint3(double subjectPoint3) {
-        this.subjectPoint3 = subjectPoint3;
+    public void setPoint_subject_Engineering(double point_subject_Engineering) {
+        this.point_subject_Engineering = point_subject_Engineering;
     }
 
     @Override
-    public String toString() {
+    public String showInfor() {
         return "Student{" +
-                "studentID='" + studentID + '\'' +
-                ", studentName='" + studentName + '\'' +
-                ", address='" + address + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", sexual=" + sexual +
-                ", subjectPoint1=" + subjectPoint1 +
-                ", subjectPoint2=" + subjectPoint2 +
-                ", subjectPoint3=" + subjectPoint3 +
+                super.toString()+
+                "point_subject_Math=" + point_subject_Math +
+                ", point_subject_Physics=" + point_subject_Physics +
+                ", point_subject_Engineering=" + point_subject_Engineering+
                 '}';
     }
 }
