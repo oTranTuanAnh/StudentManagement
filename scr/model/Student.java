@@ -3,7 +3,11 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+
+
 public class Student implements Serializable, Ranking {
+    public static final int GOOD_POINT = 7;
+    public static final int NORMAL_POINT = 5;
     private String id;
     private String name;
     private String address;
@@ -111,9 +115,9 @@ public class Student implements Serializable, Ranking {
 
     @Override
     public String rank() {
-        if (this.getAvgPoint() > 7){
+        if (this.getAvgPoint() >= GOOD_POINT){
             return "Tot";
-        }else if (this.getAvgPoint() > 5){
+        }else if (this.getAvgPoint() >= NORMAL_POINT){
             return "Kha";
         }else {
             return "Kem";

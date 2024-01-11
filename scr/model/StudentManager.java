@@ -10,7 +10,6 @@ public class StudentManager{
     private Student student;
     public static final String DATA_FILE = "data.txt";
     private static final ReadWriteFile instanceReadWrite = ReadWriteFile.getInstance();
-//    public ArrayList<Student> studentArrayList = (ArrayList<Student>) instanceReadWrite.readData(DATA_FILE);
     public ArrayList<Student> studentArrayList;
 
     public StudentManager() {

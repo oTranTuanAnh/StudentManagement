@@ -25,7 +25,7 @@ public class Views {
 
         while (choice != 0){
             System.out.println("--------------------------------------------------------");
-            System.out.println("______________******__MENU__*****_____________");
+            System.out.println("______________******__MENU__*****_______________________");
             System.out.println("1. Them moi sinh vien");System.out.println("2. Sua thong tin sinh vien");System.out.println("3. Xoa sinh vien");
             System.out.println("4. Hien thi danh sach sinh vien");System.out.println("5. Tim kiem sinh vien theo MSSV");System.out.println("6. Sap xep sinh vien");
             System.out.println("7. Xep loai sinh vien");System.out.println("0. Exit");System.out.print("NHAP LUA CHON CUA BAN: ");
@@ -40,8 +40,14 @@ public class Views {
                     }else {
                         System.out.print("Nhap ho va ten: ");String name = stringInput();
                         System.out.print("Nhap dia chi: ");String address = stringInput();
-                        System.out.print("Nhap ngay sinh: ");int day = intInput();
-                        System.out.print("Nhap thang sinh: ");int month = intInput();
+                        int day = 0;
+                        do {
+                            System.out.print("Nhap ngay sinh: ");day = intInput();
+                        }while (day <=0 || day >31);
+                        int month = 0;
+                        do {
+                            System.out.print("Nhap thang sinh: ");month = intInput();
+                        }while (month <=0 || month >12);
                         System.out.print("Nhap nam sinh: ");int year = intInput();
                         LocalDate dateOfBirth = LocalDate.of(year,month,day);
                         System.out.print("Nhap gioi tinh (nam/nu): ");String gender = stringInput();
@@ -110,12 +116,12 @@ public class Views {
                                     break;
                                 case 6:
                                     System.out.print("Nhap lai diem Vat ly: ");double rePhysicPoint = doubleInput();
-                                    controller.updatePoint_Math(idToEdit, rePhysicPoint);
+                                    controller.updatePoint_Physic(idToEdit, rePhysicPoint);
                                     controller.writeData();
                                     break;
                                 case 7:
                                     System.out.print("Nhap lai diem Toan: ");double reEngiPoint = doubleInput();
-                                    controller.updatePoint_Math(idToEdit, reEngiPoint);
+                                    controller.updatePoint_Engineer(idToEdit, reEngiPoint);
                                     controller.writeData();
                                     break;
                             }
@@ -205,7 +211,9 @@ public class Views {
                     }while (true);
                     break;
                 case 7:
+                    System.out.println("_____________DANH SACH XEP LOAI________________________________");
                     controller.rankingStudentList();
+                    System.out.println("_______________________________________________________________");
                     break;
                 case 0:
                     System.exit(0);
