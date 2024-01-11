@@ -14,6 +14,11 @@ public class StudentManager {
 
     public StudentManager() {
     }
+
+    public StudentManager(Student student) {
+        this.student = student;
+    }
+
     public int intInput(){
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
@@ -95,17 +100,22 @@ public class StudentManager {
     public void writeStudent(){
         instanceReadWrite.writeData(DATA_FILE,studentArrayList);
     }
-    public void showStudentsList(){
-        for (Student s: studentArrayList){
-            System.out.println(s);
-        }
+
+    public String getStudentInfor(Student student){
+        return "MSSV: "+ student.getId() +
+                ", Ho&Ten: " + student.getName() +
+                ", Dia chi: " + student.getAddress() +
+                ", Ngay sinh: " + student.getDateOfBirth() +
+                ", Gioi tinh: " + student.getGender() +
+                ", Diem Toan: " + student.getPoint_subject_Math() +
+                ", Diem Vat Ly: " + student.getPoint_subject_Physics() +
+                ", Diem Ky Thuat: " + student.getPoint_subject_Engineering();
+    }
+    public String getStudentPoint(Student student){
+        return "MSSV: "+ student.getId() +
+                ", Ho&Ten: " + student.getName() +
+                ", Diem Trung binh: " + student.getAvgPoint();
     }
 
-
-
-    public double getAvgPoint(){
-        double avgPoint = (student.getPoint_subject_Engineering()+student.getPoint_subject_Math()+student.getPoint_subject_Physics())/3;
-        return avgPoint;
-    }
 
 }

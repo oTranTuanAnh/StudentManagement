@@ -30,7 +30,7 @@ public class Views {
 
         while (choice != 0){
             System.out.println("--------------------------------------------------------");
-            System.out.println("___MENU___");
+            System.out.println("________******MENU*****________");
             System.out.println("1. Them moi sinh vien");
             System.out.println("2. Sua thong tin sinh vien");
             System.out.println("3. Xoa sinh vien");
@@ -81,7 +81,7 @@ public class Views {
                     break;
                 case 3:
                     System.out.print("Nhap ID sinh vien: ");
-                    String idToDelete = studentManager.stringInput();
+                    String idToDelete = stringInput();
                     if (controller.checkStudentByID(idToDelete)){
                         controller.deleteStudentByID(idToDelete);
                         controller.writeData();
@@ -89,19 +89,70 @@ public class Views {
                     } else {
                         System.out.println("KHONG TON TAI SINH VIEN");
                     }
-
                     break;
                 case 4:
-                    studentManager.showStudentsList();
+                    System.out.println("__________________________DANH SACH SINH VIEN__________________________");
+                    int inputCase4 = 0;
+                     do {
+                        System.out.println("1. Thong tin sinh vien");
+                        System.out.println("2. Diem trung binh");
+                        System.out.println("0. Quay lai");
+                        System.out.print("Nhap lua chon: ");
+                        inputCase4 = intInput();
+                        if (inputCase4 == 0){
+                            break;
+                        }
+                        switch (inputCase4){
+                            case 1:
+                                System.out.println("_____________STUDENTS INFORMATION____________");
+                                controller.showStudentListInfor();
+                                break;
+                            case 2:
+                                System.out.println("_____________STUDENTS AVERAGE POINT____________");
+                                controller.showStudentListPoint();
+                                break;
+                        }
+
+                    }while (true);
                     break;
                 case 5:
-
+                    System.out.print("Nhap ID sinh vien can tim: ");
+                    String idToFind = stringInput();
+                    if (controller.checkStudentByID(idToFind)){
+                        System.out.println("Tim thay sinh vien: ");
+                        System.out.println(controller.showStudentInfor(idToFind));
+                    } else {
+                        System.out.println("Khong tim thay!");
+                    }
                     break;
                 case 6:
+                    System.out.println("___________________CAC LUA CHON SAP XEP___________________");
+                    int inputCase6 = 0;
+                    do {
+                        System.out.println("1. Sap xep theo ten");
+                        System.out.println("2. Sap xep theo diem trung binh");
+                        System.out.println("0. Quay lai.");
+                        System.out.print("Nhap lua chon: ");
+                        inputCase6 = intInput();
+                        if (inputCase6 == 0){
+                            break;
+                        }
+                        switch (inputCase6){
+                            case 1:
+                                controller.arrangeByName();
+                                System.out.println("_____________DANH SACH SAP XEP THEO TEN____________");
+                                controller.showStudentListInfor();
+                                controller.writeData();
+                                break;
+                            case 2:
+                                controller.arrangeByAvgPoint();
+                                System.out.println("_____________DANH SACH SAP XEP THEO DIEM TRUNG BINH____________");
+                                controller.showStudentListPoint();
+                                controller.writeData();
+                                break;
+                        }
 
-                    break;
-                case 7:
-
+                    }while (true);
                     break;
                 case 0:
                     System.exit(0);

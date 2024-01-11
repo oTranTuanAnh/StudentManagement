@@ -104,4 +104,7 @@ public class Student implements Serializable {
                 ", point_subject_Engineering=" + point_subject_Engineering +
                 '}';
     }
+    public double getAvgPoint(){
+        return (this.getPoint_subject_Engineering()+this.getPoint_subject_Math()+this.getPoint_subject_Physics())/3;
+    }
 }
