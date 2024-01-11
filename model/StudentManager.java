@@ -31,66 +31,28 @@ public class StudentManager {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-    public void editStudentByID(Student student){
-        System.out.println("*******");
-        System.out.println("1. Sua ho va ten");
-        System.out.println("2. Sua dia chi");
-        System.out.println("3. Sua ngay - thang - nam sinh");
-        System.out.println("4. Sua gioi tinh");
-        System.out.println("5. Sua diem toan");
-        System.out.println("6. Sua diem vat ly");
-        System.out.println("7. Sua diem ky thuat");
-        System.out.println("0. Back");
-        System.out.println("*******");
-        System.out.println("NHAP LUA CHON: ");
-        int inputNum = intInput();
-        switch (inputNum){
-            case 1:
-                System.out.print("Nhap lai ho va ten: ");
-                String name = stringInput();
-                student.setName(name);
-                break;
-            case 2:
-                System.out.print("Nhap lai dia chi: ");
-                String address = stringInput();
-                student.setAddress(address);
-                break;
-            case 3:
-                System.out.print("Nhap lai ngay sinh: ");
-                int day = intInput();
-                System.out.print("Nhap lai thang sinh: ");
-                int month = intInput();
-                System.out.print("Nhap lai nam sinh: ");
-                int year = intInput();
-                LocalDate localDate = LocalDate.of(year,month,day);
-                student.setDateOfBirth(localDate);
-                break;
-            case 4:
-                System.out.print("Nhap lai gioi tinh: ");
-                String gender = stringInput();
-                student.setGender(gender);
-                break;
-            case 5:
-                System.out.print("Nhap lai diem Toan: ");
-                int pointMath = intInput();
-                student.setPoint_subject_Math(pointMath);
-                break;
-            case 6:
-                System.out.print("Nhap lai diem Vat ly: ");
-                int pointPhysic = intInput();
-                student.setPoint_subject_Physics(pointPhysic);
-                break;
-            case 7:
-                System.out.print("Nhap lai diem Ky thuat: ");
-                int pointEngineer = intInput();
-                student.setPoint_subject_Engineering(pointEngineer);
-                break;
-            case 0:
-                break;
-
-        }
-
+    public void editStudentName(Student student, String name){
+        student.setName(name);
     }
+    public void editStudentAddress(Student student, String address){
+        student.setAddress(address);
+    }
+    public void editStudentDateOfBirth(Student student, LocalDate date){
+        student.setDateOfBirth(date);
+    }
+    public void editStudentGender(Student student, String gender){
+        student.setGender(gender);
+    }
+    public void editStudentPoint_Math(Student student, double point){
+        student.setPoint_subject_Math(point);
+    }
+    public void editStudentPoint_Physic(Student student, double point){
+        student.setPoint_subject_Physics(point);
+    }
+    public void editStudentPoint_Engineer(Student student, double point){
+        student.setPoint_subject_Engineering(point);
+    }
+
     public void addStudent(Student student){
         studentArrayList.add(student);
     }
@@ -102,19 +64,19 @@ public class StudentManager {
     }
 
     public String getStudentInfor(Student student){
-        return "MSSV: "+ student.getId() +
-                ", Ho&Ten: " + student.getName() +
-                ", Dia chi: " + student.getAddress() +
-                ", Ngay sinh: " + student.getDateOfBirth() +
-                ", Gioi tinh: " + student.getGender() +
-                ", Diem Toan: " + student.getPoint_subject_Math() +
-                ", Diem Vat Ly: " + student.getPoint_subject_Physics() +
-                ", Diem Ky Thuat: " + student.getPoint_subject_Engineering();
+        return String.format("%-12s%-30s%-20s%-25s%-17s%-20s%-20s%-20s","MSSV: "+ student.getId(),
+                "| Ho va Ten: " + student.getName(),
+                "| Dia chi: " + student.getAddress(),
+                "| Ngay sinh: " + student.getDateOfBirth(),
+                "| Gioi tinh: " + student.getGender(),
+                "| Diem Toan: " + student.getPoint_subject_Math(),
+                "| Diem Vat Ly: " + student.getPoint_subject_Physics(),
+                "| Diem Ky Thuat: " + student.getPoint_subject_Engineering());
     }
     public String getStudentPoint(Student student){
-        return "MSSV: "+ student.getId() +
-                ", Ho&Ten: " + student.getName() +
-                ", Diem Trung binh: " + student.getAvgPoint();
+        return String.format("%-12s%-30s%-20s%.3f","MSSV: "+ student.getId(),
+                "| Ho va Ten: " + student.getName(),
+                "| Diem Trung binh: ",student.getAvgPoint());
     }
 
 

@@ -1,11 +1,8 @@
 package views;
 
 import controller.StudentsController;
-import model.Student;
-import model.StudentManager;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Views {
@@ -22,8 +19,8 @@ public class Views {
         return sc.nextLine();
     }
     public static void main(String[] args) {
-        StudentManager studentManager = new StudentManager();
-        ArrayList<Student> studentArrayList = StudentManager.studentArrayList;
+//        StudentManager studentManager = new StudentManager();
+//        ArrayList<Student> studentArrayList = StudentManager.studentArrayList;
         StudentsController controller = new StudentsController();
         int choice = -1;
         Scanner in = new Scanner(System.in);
@@ -31,14 +28,9 @@ public class Views {
         while (choice != 0){
             System.out.println("--------------------------------------------------------");
             System.out.println("________******MENU*****________");
-            System.out.println("1. Them moi sinh vien");
-            System.out.println("2. Sua thong tin sinh vien");
-            System.out.println("3. Xoa sinh vien");
-            System.out.println("4. Hien thi danh sach sinh vien");
-            System.out.println("5. Tim kiem sinh vien theo ID");
-            System.out.println("6. Sap xep sinh vien");
-            System.out.println("0. Exit");
-            System.out.print("NHAP LUA CHON CUA BAN: ");
+            System.out.println("1. Them moi sinh vien");System.out.println("2. Sua thong tin sinh vien");System.out.println("3. Xoa sinh vien");
+            System.out.println("4. Hien thi danh sach sinh vien");System.out.println("5. Tim kiem sinh vien theo MSSV");System.out.println("6. Sap xep sinh vien");
+            System.out.println("0. Exit");System.out.print("NHAP LUA CHON CUA BAN: ");
             choice = in.nextInt();
 
             switch (choice){
@@ -64,17 +56,70 @@ public class Views {
                     }
                     break;
                 case 2:
-                    System.out.print("Nhap ID sinh vien: ");
-                    String idInput = studentManager.stringInput();
-                    for (Student s: studentArrayList){
-                        if (s.getId().equals(idInput)){
-                        studentManager.editStudentByID(s);
-                        System.out.println("SUA THANH CONG!!!");
-                        }
+                    System.out.print("Nhap ma so sinh vien: ");
+                    String idToEdit = stringInput();
+                    if (controller.checkStudentByID(idToEdit)){
+                        int inputCase2 = 0;
+                        do {
+                            System.out.println("_________________CAC LUA CHON SUA THONG TIN_______________");
+                            System.out.println("1. Sua ho va ten");System.out.println("2. Sua dia chi");
+                            System.out.println("3. Sua ngay - thang - nam sinh");System.out.println("4. Sua gioi tinh");
+                            System.out.println("5. Sua diem toan");System.out.println("6. Sua diem vat ly");
+                            System.out.println("7. Sua diem ky thuat");System.out.println("0. Back");
+                            System.out.print("Nhap lua chon: ");
+                            inputCase2 = intInput();
+                            if (inputCase2 == 0){
+                                break;
+                            }
+                            switch (inputCase2){
+                                case 1:
+                                    System.out.print("Nhap lai ten sinh vien: ");
+                                    String reName = stringInput();
+                                    controller.updateName(idToEdit, reName);
+                                    controller.writeData();
+                                    break;
+                                case 2:
+                                    System.out.print("Nhap lai dia chi: ");
+                                    String reAddress = stringInput();
+                                    controller.updateAddress(idToEdit, reAddress);
+                                    controller.writeData();
+                                    break;
+                                case 3:
+                                    System.out.print("Nhap lai ngay sinh: ");int reDay = intInput();
+                                    System.out.print("Nhap lai thang sinh: ");int reMonth = intInput();
+                                    System.out.print("Nhap lai nam sinh: ");int reYear = intInput();
+                                    controller.updateDateOfBirth(idToEdit, reDay, reMonth, reYear);
+                                    controller.writeData();
+                                    break;
+                                case 4:
+                                    System.out.print("Nhap lai dia chi: ");String reGender = stringInput();
+                                    controller.updateGender(idToEdit, reGender);
+                                    controller.writeData();
+                                    break;
+                                case 5:
+                                    System.out.print("Nhap lai diem Toan: ");double reMathPoint = doubleInput();
+                                    controller.updatePoint_Math(idToEdit, reMathPoint);
+                                    controller.writeData();
+                                    break;
+                                case 6:
+                                    System.out.print("Nhap lai diem Vat ly: ");double rePhysicPoint = doubleInput();
+                                    controller.updatePoint_Math(idToEdit, rePhysicPoint);
+                                    controller.writeData();
+                                    break;
+                                case 7:
+                                    System.out.print("Nhap lai diem Toan: ");double reEngiPoint = doubleInput();
+                                    controller.updatePoint_Math(idToEdit, reEngiPoint);
+                                    controller.writeData();
+                                    break;
+                            }
+                            System.out.println("SUA THANH CONG!!!");
+
+                        }while (true);
+
                     }
                     break;
                 case 3:
-                    System.out.print("Nhap ID sinh vien: ");
+                    System.out.print("Nhap ma so sinh vien: ");
                     String idToDelete = stringInput();
                     if (controller.checkStudentByID(idToDelete)){
                         controller.deleteStudentByID(idToDelete);
@@ -88,8 +133,8 @@ public class Views {
                     System.out.println("__________________________DANH SACH SINH VIEN__________________________");
                     int inputCase4 = 0;
                      do {
-                        System.out.println("1. Thong tin sinh vien");
-                        System.out.println("2. Diem trung binh");
+                        System.out.println("1. Danh sach Thong tin sinh vien");
+                        System.out.println("2. Danh sach Diem trung binh cua sinh vien");
                         System.out.println("0. Quay lai");
                         System.out.print("Nhap lua chon: ");
                         inputCase4 = intInput();
@@ -99,18 +144,18 @@ public class Views {
                         switch (inputCase4){
                             case 1:
                                 System.out.println("_____________STUDENTS INFORMATION____________");
-                                controller.showStudentListInfor();
+                                controller.showStudentListByInfor();
                                 break;
                             case 2:
                                 System.out.println("_____________STUDENTS AVERAGE POINT____________");
-                                controller.showStudentListPoint();
+                                controller.showStudentListByPoint();
                                 break;
                         }
 
                     }while (true);
                     break;
                 case 5:
-                    System.out.print("Nhap ID sinh vien can tim: ");
+                    System.out.print("Nhap ma so sinh vien can tim: ");
                     String idToFind = stringInput();
                     if (controller.checkStudentByID(idToFind)){
                         System.out.println("Tim thay sinh vien: ");
@@ -135,13 +180,13 @@ public class Views {
                             case 1:
                                 controller.arrangeByName();
                                 System.out.println("_____________DANH SACH SAP XEP THEO TEN____________");
-                                controller.showStudentListInfor();
+                                controller.showStudentListByInfor();
                                 controller.writeData();
                                 break;
                             case 2:
                                 controller.arrangeByAvgPoint();
                                 System.out.println("_____________DANH SACH SAP XEP THEO DIEM TRUNG BINH____________");
-                                controller.showStudentListPoint();
+                                controller.showStudentListByPoint();
                                 controller.writeData();
                                 break;
                         }
