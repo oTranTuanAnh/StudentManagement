@@ -43,31 +43,25 @@ public class Views {
 
             switch (choice){
                 case 1:
-                    System.out.print("Nhap ma sinh vien: ");
-                    String id = stringInput();
-                    System.out.print("Nhap ho va ten: ");
-                    String name = stringInput();
-                    System.out.print("Nhap dia chi: ");
-                    String address = stringInput();
-                    System.out.print("Nhap ngay sinh: ");
-                    int day = intInput();
-                    System.out.print("Nhap thang sinh: ");
-                    int month = intInput();
-                    System.out.print("Nhap nam sinh: ");
-                    int year = intInput();
-                    LocalDate dateOfBirth = LocalDate.of(year,month,day);
-                    System.out.print("Nhap gioi tinh (nam/nu): ");
-                    String gender = stringInput();
-                    System.out.print("Nhap diem mon Toan: ");
-                    double mathPoint = doubleInput();
-                    System.out.print("Nhap diem mon Vat ly: ");
-                    double physicsPoint = doubleInput();
-                    System.out.print("Nhap diem mon Ky thuat: ");
-                    double engineeringPoint = doubleInput();
-                    Student st = new Student(id, name, address, dateOfBirth, gender, mathPoint, physicsPoint, engineeringPoint);
-                    studentManager.addStudent(st);
-                    studentManager.writeStudent();
-                    System.out.println("Them thanh cong!!!");
+                    System.out.print("Nhap ma sinh vien: ");String id = stringInput();
+                    if (controller.checkStudentByID(id)){
+                        System.out.println("Sinh vien da ton tai!!  MOI NHAP LAI.");
+                        break;
+                    }else {
+                        System.out.print("Nhap ho va ten: ");String name = stringInput();
+                        System.out.print("Nhap dia chi: ");String address = stringInput();
+                        System.out.print("Nhap ngay sinh: ");int day = intInput();
+                        System.out.print("Nhap thang sinh: ");int month = intInput();
+                        System.out.print("Nhap nam sinh: ");int year = intInput();
+                        LocalDate dateOfBirth = LocalDate.of(year,month,day);
+                        System.out.print("Nhap gioi tinh (nam/nu): ");String gender = stringInput();
+                        System.out.print("Nhap diem mon Toan: ");double mathPoint = doubleInput();
+                        System.out.print("Nhap diem mon Vat ly: ");double physicsPoint = doubleInput();
+                        System.out.print("Nhap diem mon Ky thuat: ");double engineeringPoint = doubleInput();
+                        controller.addNewStudentToList(controller.createNewStudent(id, name, address, dateOfBirth, gender, mathPoint, physicsPoint, engineeringPoint));
+                        controller.writeData();
+                        System.out.println("Them thanh cong!!!");
+                    }
                     break;
                 case 2:
                     System.out.print("Nhap ID sinh vien: ");
