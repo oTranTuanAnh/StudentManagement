@@ -19,18 +19,16 @@ public class Views {
         return sc.nextLine();
     }
     public static void main(String[] args) {
-//        StudentManager studentManager = new StudentManager();
-//        ArrayList<Student> studentArrayList = StudentManager.studentArrayList;
         StudentsController controller = new StudentsController();
         int choice = -1;
         Scanner in = new Scanner(System.in);
 
         while (choice != 0){
             System.out.println("--------------------------------------------------------");
-            System.out.println("________******MENU*****________");
+            System.out.println("______________******__MENU__*****_____________");
             System.out.println("1. Them moi sinh vien");System.out.println("2. Sua thong tin sinh vien");System.out.println("3. Xoa sinh vien");
             System.out.println("4. Hien thi danh sach sinh vien");System.out.println("5. Tim kiem sinh vien theo MSSV");System.out.println("6. Sap xep sinh vien");
-            System.out.println("0. Exit");System.out.print("NHAP LUA CHON CUA BAN: ");
+            System.out.println("7. Xep loai sinh vien");System.out.println("0. Exit");System.out.print("NHAP LUA CHON CUA BAN: ");
             choice = in.nextInt();
 
             switch (choice){
@@ -47,9 +45,18 @@ public class Views {
                         System.out.print("Nhap nam sinh: ");int year = intInput();
                         LocalDate dateOfBirth = LocalDate.of(year,month,day);
                         System.out.print("Nhap gioi tinh (nam/nu): ");String gender = stringInput();
-                        System.out.print("Nhap diem mon Toan: ");double mathPoint = doubleInput();
-                        System.out.print("Nhap diem mon Vat ly: ");double physicsPoint = doubleInput();
-                        System.out.print("Nhap diem mon Ky thuat: ");double engineeringPoint = doubleInput();
+                        double mathPoint = 0;
+                        double physicsPoint = 0;
+                        double engineeringPoint = 0;
+                        do {
+                            System.out.print("Nhap diem mon Toan (0-10): ");mathPoint = doubleInput();
+                        }while (mathPoint<0 || mathPoint>10);
+                        do {
+                            System.out.print("Nhap diem mon Vat ly (0-10): ");physicsPoint = doubleInput();
+                        }while (physicsPoint<0 || physicsPoint>10);
+                        do {
+                            System.out.print("Nhap diem mon Ky thuat (0-10): ");engineeringPoint = doubleInput();
+                        }while (engineeringPoint<0 || engineeringPoint>10);
                         controller.addNewStudentToList(controller.createNewStudent(id, name, address, dateOfBirth, gender, mathPoint, physicsPoint, engineeringPoint));
                         controller.writeData();
                         System.out.println("Them thanh cong!!!");
@@ -143,12 +150,14 @@ public class Views {
                         }
                         switch (inputCase4){
                             case 1:
-                                System.out.println("_____________STUDENTS INFORMATION____________");
+                                System.out.println("_____________STUDENTS INFORMATION____________________________________");
                                 controller.showStudentListByInfor();
+                                System.out.println("_____________________________________________________________________");
                                 break;
                             case 2:
-                                System.out.println("_____________STUDENTS AVERAGE POINT____________");
+                                System.out.println("_____________STUDENTS AVERAGE POINT__________________________________");
                                 controller.showStudentListByPoint();
+                                System.out.println("_____________________________________________________________________");
                                 break;
                         }
 
@@ -179,19 +188,24 @@ public class Views {
                         switch (inputCase6){
                             case 1:
                                 controller.arrangeByName();
-                                System.out.println("_____________DANH SACH SAP XEP THEO TEN____________");
+                                System.out.println("_____________DANH SACH SAP XEP THEO TEN________________________________");
                                 controller.showStudentListByInfor();
+                                System.out.println("_______________________________________________________________________");
                                 controller.writeData();
                                 break;
                             case 2:
                                 controller.arrangeByAvgPoint();
-                                System.out.println("_____________DANH SACH SAP XEP THEO DIEM TRUNG BINH____________");
+                                System.out.println("_____________DANH SACH SAP XEP THEO DIEM TRUNG BINH_________________________");
                                 controller.showStudentListByPoint();
+                                System.out.println("____________________________________________________________________________");
                                 controller.writeData();
                                 break;
                         }
 
                     }while (true);
+                    break;
+                case 7:
+                    controller.rankingStudentList();
                     break;
                 case 0:
                     System.exit(0);

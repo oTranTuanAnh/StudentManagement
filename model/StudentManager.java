@@ -6,14 +6,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentManager {
+public class StudentManager{
     private Student student;
     public static final String DATA_FILE = "data.txt";
     private static final ReadWriteFile instanceReadWrite = ReadWriteFile.getInstance();
-    public static ArrayList<Student> studentArrayList = (ArrayList<Student>) instanceReadWrite.readData(DATA_FILE);
+//    public ArrayList<Student> studentArrayList = (ArrayList<Student>) instanceReadWrite.readData(DATA_FILE);
+    public ArrayList<Student> studentArrayList;
 
     public StudentManager() {
+        this.studentArrayList = (ArrayList<Student>) instanceReadWrite.readData(DATA_FILE);
     }
+
 
     public StudentManager(Student student) {
         this.student = student;
@@ -54,13 +57,13 @@ public class StudentManager {
     }
 
     public void addStudent(Student student){
-        studentArrayList.add(student);
+        this.studentArrayList.add(student);
     }
     public void removeStudent(Student student){
-        studentArrayList.remove(student);
+        this.studentArrayList.remove(student);
     }
     public void writeStudent(){
-        instanceReadWrite.writeData(DATA_FILE,studentArrayList);
+        instanceReadWrite.writeData(DATA_FILE,this.studentArrayList);
     }
 
     public String getStudentInfor(Student student){
@@ -80,4 +83,10 @@ public class StudentManager {
     }
 
 
+
+    public String getStudentRank(Student student){
+        return String.format("%-12s%-30s%-12s%-15s","MSSV: "+ student.getId(),
+                "| Ho va Ten: " + student.getName(),
+                "| Xep loai: ",student.rank());
+    }
 }

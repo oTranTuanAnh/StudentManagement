@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Student implements Serializable {
+public class Student implements Serializable, Ranking {
     private String id;
     private String name;
     private String address;
@@ -106,5 +106,17 @@ public class Student implements Serializable {
     }
     public double getAvgPoint(){
         return (this.getPoint_subject_Engineering()+this.getPoint_subject_Math()+this.getPoint_subject_Physics())/3;
+    }
+
+
+    @Override
+    public String rank() {
+        if (this.getAvgPoint() > 7){
+            return "Tot";
+        }else if (this.getAvgPoint() > 5){
+            return "Kha";
+        }else {
+            return "Kem";
+        }
     }
 }
